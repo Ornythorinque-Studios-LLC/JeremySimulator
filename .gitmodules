@@ -1,0 +1,3 @@
+[submodule "Dependencies/objective-cmas"]
+	path = Dependencies/objective-cmas
+	url = https://github.com/tuvalutorture/objective-cmas.git
