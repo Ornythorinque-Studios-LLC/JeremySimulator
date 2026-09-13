@@ -13,7 +13,6 @@
 		D990FAA63055F12C008E3F2B /* MenuMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = D990FAA53055F12C008E3F2B /* MenuMain.xib */; };
 		D990FACE30561DC9008E3F2B /* libsimas_runtime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D990FAC830561DA1008E3F2B /* libsimas_runtime.a */; };
 		D990FAD73056321D008E3F2B /* SIMASList.m in Sources */ = {isa = PBXBuildFile; fileRef = D990FAD33056321D008E3F2B /* SIMASList.m */; };
-		D990FAD83056321D008E3F2B /* SIMASCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D990FAD43056321D008E3F2B /* SIMASCommandLine.m */; };
 		D990FAD93056321D008E3F2B /* SIMASStandardLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = D990FAD53056321D008E3F2B /* SIMASStandardLibrary.m */; };
 		D9F7ADB8305639E800FD90A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F7ADB7305639E800FD90A8 /* main.m */; };
 		D9F7ADBB3056561E00FD90A8 /* JeremyGame.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F7ADBA3056561E00FD90A8 /* JeremyGame.m */; };
@@ -24,6 +23,9 @@
 		D9F7ADC830565B8A00FD90A8 /* script.simas in Resources */ = {isa = PBXBuildFile; fileRef = D9F7ADC730565B8A00FD90A8 /* script.simas */; };
 		D9F7ADCB30565CD500FD90A8 /* JeremyRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F7ADCA30565CD500FD90A8 /* JeremyRuntime.m */; };
 		D9F7ADCD3056631000FD90A8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F7ADCC3056631000FD90A8 /* MainMenu.xib */; };
+		D9F7ADD9305742B900FD90A8 /* JeremyMood.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F7ADD4305742B800FD90A8 /* JeremyMood.m */; };
+		D9F7ADDA305742B900FD90A8 /* JeremyPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F7ADD7305742B900FD90A8 /* JeremyPlayer.m */; };
+		D9F7ADDB305742B900FD90A8 /* JeremyJob.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F7ADD8305742B900FD90A8 /* JeremyJob.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,10 +65,8 @@
 		D990FAA53055F12C008E3F2B /* MenuMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuMain.xib; sourceTree = "<group>"; };
 		D990FAC030561DA1008E3F2B /* objectivismas.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = objectivismas.xcodeproj; path = "Dependencies/objective-cmas/objectivismas.xcodeproj"; sourceTree = "<group>"; };
 		D990FACF30563217008E3F2B /* SIMASStandardLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIMASStandardLibrary.h; sourceTree = "<group>"; };
-		D990FAD030563217008E3F2B /* SIMASCommandLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIMASCommandLine.h; sourceTree = "<group>"; };
 		D990FAD130563217008E3F2B /* SIMASList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIMASList.h; sourceTree = "<group>"; };
 		D990FAD33056321D008E3F2B /* SIMASList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMASList.m; sourceTree = "<group>"; };
-		D990FAD43056321D008E3F2B /* SIMASCommandLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMASCommandLine.m; sourceTree = "<group>"; };
 		D990FAD53056321D008E3F2B /* SIMASStandardLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMASStandardLibrary.m; sourceTree = "<group>"; };
 		D9F7ADB7305639E800FD90A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D9F7ADB93056561E00FD90A8 /* JeremyGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JeremyGame.h; sourceTree = "<group>"; };
@@ -82,6 +82,12 @@
 		D9F7ADC930565CD500FD90A8 /* JeremyRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JeremyRuntime.h; sourceTree = "<group>"; };
 		D9F7ADCA30565CD500FD90A8 /* JeremyRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JeremyRuntime.m; sourceTree = "<group>"; };
 		D9F7ADCC3056631000FD90A8 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		D9F7ADD2305742B800FD90A8 /* JeremyPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JeremyPlayer.h; sourceTree = "<group>"; };
+		D9F7ADD4305742B800FD90A8 /* JeremyMood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JeremyMood.m; sourceTree = "<group>"; };
+		D9F7ADD5305742B900FD90A8 /* JeremyJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JeremyJob.h; sourceTree = "<group>"; };
+		D9F7ADD6305742B900FD90A8 /* JeremyMood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JeremyMood.h; sourceTree = "<group>"; };
+		D9F7ADD7305742B900FD90A8 /* JeremyPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JeremyPlayer.m; sourceTree = "<group>"; };
+		D9F7ADD8305742B900FD90A8 /* JeremyJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JeremyJob.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,12 @@
 		D990FA9C3055EF3E008E3F2B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D9F7ADD5305742B900FD90A8 /* JeremyJob.h */,
+				D9F7ADD8305742B900FD90A8 /* JeremyJob.m */,
+				D9F7ADD6305742B900FD90A8 /* JeremyMood.h */,
+				D9F7ADD4305742B800FD90A8 /* JeremyMood.m */,
+				D9F7ADD2305742B800FD90A8 /* JeremyPlayer.h */,
+				D9F7ADD7305742B900FD90A8 /* JeremyPlayer.m */,
 				D990FA863055ED63008E3F2B /* AppDelegate.h */,
 				D990FA873055ED63008E3F2B /* AppDelegate.m */,
 				D9F7ADBF305656FC00FD90A8 /* JeremyEvent.h */,
@@ -182,10 +194,8 @@
 			children = (
 				D990FAD33056321D008E3F2B /* SIMASList.m */,
 				D990FAD53056321D008E3F2B /* SIMASStandardLibrary.m */,
-				D990FAD43056321D008E3F2B /* SIMASCommandLine.m */,
 				D990FAD130563217008E3F2B /* SIMASList.h */,
 				D990FACF30563217008E3F2B /* SIMASStandardLibrary.h */,
-				D990FAD030563217008E3F2B /* SIMASCommandLine.h */,
 			);
 			path = JeremySIMAS;
 			sourceTree = "<group>";
@@ -286,17 +296,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D990FAD83056321D008E3F2B /* SIMASCommandLine.m in Sources */,
 				D9F7ADC43056570A00FD90A8 /* JeremyLocation.m in Sources */,
 				D990FAA23055EFC1008E3F2B /* JeremyPanel.m in Sources */,
 				D990FAD93056321D008E3F2B /* SIMASStandardLibrary.m in Sources */,
 				D990FAD73056321D008E3F2B /* SIMASList.m in Sources */,
 				D9F7ADC1305656FC00FD90A8 /* JeremyEvent.m in Sources */,
 				D9F7ADBE3056563E00FD90A8 /* JeremyPet.m in Sources */,
+				D9F7ADDB305742B900FD90A8 /* JeremyJob.m in Sources */,
 				D990FA9F3055EFB5008E3F2B /* JeremyUIController.m in Sources */,
 				D9F7ADBB3056561E00FD90A8 /* JeremyGame.m in Sources */,
 				D9F7ADB8305639E800FD90A8 /* main.m in Sources */,
+				D9F7ADD9305742B900FD90A8 /* JeremyMood.m in Sources */,
 				D9F7ADCB30565CD500FD90A8 /* JeremyRuntime.m in Sources */,
+				D9F7ADDA305742B900FD90A8 /* JeremyPlayer.m in Sources */,
 				D990FA883055ED63008E3F2B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
