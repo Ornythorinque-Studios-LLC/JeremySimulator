@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
-@interface JeremyPlayer : NSObject
+@interface JeremyPlayer : NSObject {
+    double _money;
+    
+}
+
 
 @end
-
-NS_ASSUME_NONNULL_END

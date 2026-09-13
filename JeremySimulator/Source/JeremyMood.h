@@ -6,12 +6,10 @@
 //  Copyright © 2026 Ornithorynque Studios. All rights reserved.
 //
 
-#import <simas_runtime/simas_runtime.h>
+#import <SIMASVariable.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface JeremyMood : SIMASData
+@interface JeremyMood : SIMASData {
+    
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

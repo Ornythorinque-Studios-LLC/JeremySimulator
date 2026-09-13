@@ -10,7 +10,7 @@
 #import <SIMASVariable.h>
 
 @interface JeremyLocation : SIMASData {
-    
+    NSString *name;
 }
 
 @end

@@ -10,6 +10,8 @@
 #import <SIMASRuntime.h>
 
 @interface JeremyRuntime : SIMASRuntime {
+    NSMutableDictionary *globalLocations;
+    NSMutableDictionary *globalEvents;
     
 }
 

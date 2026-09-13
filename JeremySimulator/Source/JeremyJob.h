@@ -8,10 +8,11 @@
 
 #import "JeremyLocation.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface JeremyJob : JeremyLocation
+@interface JeremyJob : JeremyLocation {
+    double hourlyPay;
+    NSRange hoursWorked;
+    BOOL workedDays[7];
+    
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

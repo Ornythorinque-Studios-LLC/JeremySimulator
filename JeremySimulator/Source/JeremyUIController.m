@@ -14,7 +14,7 @@
 #include "JeremyRuntime.h"
 #include <objc/runtime.h>
 
-static inline JeremyUIController **theController() {
+static inline JeremyUIController **theController(void) {
     static JeremyUIController *controller;
     return &controller;
 }
