@@ -7,7 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "JeremyAPI.h"
+
+typedef enum { // used to reference ui elements, e.g. Left = the left panel, Right = the right panel
+    JeremyLeft,
+    JeremyRight
+} JeremyUIPosition;
 
 @interface JeremyPanel : NSBox {
 	IBOutlet NSTextField* title;

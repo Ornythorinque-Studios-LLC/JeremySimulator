@@ -22,7 +22,7 @@
 
 - (void)resizeButtons {
 	NSArray* buttons = [[self contentView] subviews];
-	int count = [buttons count], i = 0;
+	NSInteger count = [buttons count], i = 0;
 	if (!count) return;
 	
 	NSRect bounds = [[self contentView] bounds];
@@ -42,7 +42,7 @@
 }
 
 - (void)addButtons:(NSArray*)array {
-	int i = [array count] - 1; 
+	NSInteger i = [array count] - 1;
 	for (; i >= 0; i--) [[self contentView] addSubview:[array objectAtIndex:i]];
 	[self resizeButtons];
 }
@@ -62,17 +62,17 @@
 
 - (void)removeAllButtons {
 	NSArray* buttons = [[self contentView] subviews];
-	int buttonCount = [buttons count], i = 0;
+	NSInteger buttonCount = [buttons count], i = 0;
 	for (; i < buttonCount; i++) [[buttons objectAtIndex:i] removeFromSuperview]; // retain count zero, button dead :)
 }
 - (void)disableAllButtons {
 	NSArray* buttons = [[self contentView] subviews];
-	int buttonCount = [buttons count], i = 0;
+	NSInteger buttonCount = [buttons count], i = 0;
 	for (; i < buttonCount; i++) [[buttons objectAtIndex:i] setEnabled:NO];
 }
 - (void)enableAllButtons {
 	NSArray* buttons = [[self contentView] subviews];
-	int buttonCount = [buttons count], i = 0;
+	NSInteger buttonCount = [buttons count], i = 0;
 	for (; i < buttonCount; i++) [[buttons objectAtIndex:i] setEnabled:YES];
 }
 

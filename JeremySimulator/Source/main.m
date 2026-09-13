@@ -7,7 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SIMASRuntime.h"
+#import "SIMASStandardLibrary.h"
+#import "SIMASList.h"
 
 int main(int argc, const char * argv[]) {
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
+    [[SIMASRuntime runtime] registerLibrary:[SIMASStandardLibrary class] withPrefix:@""];
+    [[SIMASRuntime runtime] registerLibrary:[SIMASListLibrary class] withPrefix:@"List"];
+    [pool release];
     return NSApplicationMain(argc, argv);
 }

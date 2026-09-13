@@ -7,17 +7,31 @@
 //
 
 #import "JeremyUIController.h"
-#import "JeremyGameController.h"
 #include <unistd.h>
+#include "SIMASRuntime.h"
+#include "SIMASStandardLibrary.h"
+#include "SIMASList.h"
+
+static inline JeremyUIController **theController() {
+    static JeremyUIController *controller;
+    return &controller;
+}
 
 @implementation JeremyUIController
++ (JeremyUIController*)theController {
+    return *theController();
+}
+
 - (void)awakeFromNib {
+    [SIMASRuntime runtime];
 	[userInput setDelegate:self];
 	currentUserInput = nil;
-	game = [[JeremyGameController alloc] initWithUI:self];
 	displays = [NSMutableArray new];
 	printQueue = [NSMutableArray new];
-	[game beginGame];
+    *theController() = self;
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
+    [[SIMASRuntime runtime] runFromString:@"set in letarg; print letarg;"];
+    [pool release];
 }
 
 - (void)clearLogs {
@@ -115,7 +129,7 @@
 + (NSTextField*)newLabel {
 	NSTextField* new = [NSTextField new];
 	[new setEditable:NO];
-	[new setBezelStyle:NSRoundedBezelStyle];
+	[new setBezelStyle:NSTextFieldRoundedBezel];
 	return new;
 }
 
@@ -129,7 +143,7 @@
 }
 
 - (void)resizeLabels {
-	int labelCount = [displays count], i = 0;
+	NSInteger labelCount = [displays count], i = 0;
 	float padding = 9.0f, currentX = padding, buttonSize = (([topDisplay frame]).size.width - (padding * (labelCount + 1))) / labelCount;
 	unsigned int theReferenceMask = NSViewMinXMargin | NSViewWidthSizable | NSViewMaxXMargin | NSViewMinYMargin;
 	for (; i < labelCount; i++) {
@@ -157,7 +171,7 @@
 	[self resizeLabels];
 }
 
-- (int)labelCount {
+- (NSInteger)labelCount {
 	return [displays count];
 }
 
@@ -166,7 +180,7 @@
 }
 
 - (void)removeAllLabels {
-	int i = 0, count = [displays count];
+	NSInteger i = 0, count = [displays count];
 	for (; i < count; i++) [[displays objectAtIndex:i] removeFromSuperview]; // retain counts: 1
 	[displays removeAllObjects]; // all is nuked
 }

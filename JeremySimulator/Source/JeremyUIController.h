@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "JeremyPanel.h"
 
-@interface JeremyUIController : NSObject {
+@interface JeremyUIController : NSObject <NSTextFieldDelegate> {
 	IBOutlet NSWindow* theWindow;
 	IBOutlet JeremyPanel* leftPanel;
 	IBOutlet JeremyPanel* rightPanel;
@@ -27,6 +27,8 @@
 	id game;
 }
 
++ (JeremyUIController*)theController;
+
 - (void)clearLogs;
 - (IBAction)clearLogs:(id)sender;
 - (NSString*)getUserInput; 
@@ -37,7 +39,7 @@
 + (NSTextField*)newLabel;
 - (void)addLabel:(NSTextField*)field;
 - (void)removeLabel:(int)label;
-- (int)labelCount;
+- (NSInteger)labelCount;
 - (NSTextField*)getField:(int)number;
 - (NSArray*)allLabels;
 - (void)removeAllLabels;
