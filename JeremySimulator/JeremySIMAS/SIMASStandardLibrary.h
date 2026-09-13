@@ -26,3 +26,4 @@
 @interface SIMASStandardLibrary : NSObject <SIMASLibrary>
 + (void)registerToSIMAS:(NSString*)prefix;
 @end
+ 
