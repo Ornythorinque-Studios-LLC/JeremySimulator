@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@interface JeremyGame : NSObject {
+    NSTimer *gameTimer;
+}
 
-@interface JeremyGame : NSObject
-
+- (void)tickTime:(NSTimer*)timer;
 @end
-
-NS_ASSUME_NONNULL_END

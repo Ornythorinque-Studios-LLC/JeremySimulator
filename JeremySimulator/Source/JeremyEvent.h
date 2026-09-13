@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SIMASVariable.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface JeremyEvent : NSObject
+@interface JeremyEvent : SIMASData {
+    
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

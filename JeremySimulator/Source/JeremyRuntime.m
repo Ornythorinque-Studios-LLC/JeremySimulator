@@ -9,5 +9,12 @@
 #import "JeremyRuntime.h"
 
 @implementation JeremyRuntime
++ (JeremyRuntime*)beginJeremyRuntime {
+    JeremyRuntime *runtime = [JeremyRuntime runtime];
+    return runtime;
+}
 
++ (JeremyRuntime*)runtime {
+    return (JeremyRuntime*)[super runtime];
+}
 @end

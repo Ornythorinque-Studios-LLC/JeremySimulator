@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SIMASVariable.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface JeremyLocation : NSObject
+@interface JeremyLocation : SIMASData {
+    
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

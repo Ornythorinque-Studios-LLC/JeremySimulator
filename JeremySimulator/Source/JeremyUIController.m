@@ -8,9 +8,11 @@
 
 #import "JeremyUIController.h"
 #include <unistd.h>
-#include "SIMASRuntime.h"
+#include <SIMASRuntime.h>
 #include "SIMASStandardLibrary.h"
 #include "SIMASList.h"
+#include "JeremyRuntime.h"
+#include <objc/runtime.h>
 
 static inline JeremyUIController **theController() {
     static JeremyUIController *controller;
@@ -29,9 +31,7 @@ static inline JeremyUIController **theController() {
 	displays = [NSMutableArray new];
 	printQueue = [NSMutableArray new];
     *theController() = self;
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    [[SIMASRuntime runtime] runFromString:@"set in letarg; print letarg;"];
-    [pool release];
+    game = [JeremyRuntime beginJeremyRuntime];
 }
 
 - (void)clearLogs {

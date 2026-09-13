@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SIMASVariable.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface JeremyPet : NSObject
+@interface JeremyPet : SIMASData {
+    int health;
+    
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

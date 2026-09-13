@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SIMASRuntime.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@interface JeremyRuntime : SIMASRuntime {
+    
+}
 
-@interface JeremyRuntime : NSObject
-
++ (JeremyRuntime*)beginJeremyRuntime;
++ (JeremyRuntime*)runtime; // override to avoid having to cast every damn call
 @end
-
-NS_ASSUME_NONNULL_END
