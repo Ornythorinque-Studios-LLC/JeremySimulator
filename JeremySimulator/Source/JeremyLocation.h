@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SIMASVariable.h>
+#import "JeremyObject.h"
 
-@interface JeremyLocation : SIMASData {
-    NSString *name;
+@interface JeremyLocation : JeremyObject {
+    NSImage *defaultImage;
 }
 
 @end

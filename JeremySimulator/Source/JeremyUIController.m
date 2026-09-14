@@ -6,13 +6,125 @@
 //  Copyright 2026 __MyCompanyName__. All rights reserved.
 //
 
+#import <unistd.h>
+#import <SIMASRuntime.h>
+#import "SIMASStandardLibrary.h"
+#import "SIMASList.h"
+#import "JeremyRuntime.h"
 #import "JeremyUIController.h"
-#include <unistd.h>
-#include <SIMASRuntime.h>
-#include "SIMASStandardLibrary.h"
-#include "SIMASList.h"
-#include "JeremyRuntime.h"
-#include <objc/runtime.h>
+
+@implementation JeremyOption
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setBezelStyle:NSRoundedBezelStyle];
+        [self setAutoresizingMask:(NSViewMaxXMargin | NSViewMinXMargin | NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewHeightSizable)];
+    }
+    return self;
+}
+
+- (void)toggle {
+    [self setEnabled:![self isEnabled]];
+}
+@end
+
+@implementation JeremyPanel
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setBoxType:NSBoxPrimary];
+        [self setTitlePosition:NSNoTitle];
+        _heading = [NSMutableString new];
+        [self setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
+        [self setAutoresizesSubviews:YES];
+        _options = [NSMutableArray new];
+    }
+    return self;
+}
+
++ (JeremyPanel*)newPanel:(NSArray*)buttons {
+    JeremyPanel *panel = [JeremyPanel new];
+    [panel addButtons:buttons];
+    return panel;
+}
+
+- (void)setHeading:(NSString*)heading {
+    [_heading setString:heading];
+    [_header setStringValue:_heading];
+}
+
+- (void)setHeader:(NSTextField*)header {
+    if (header != _header) {
+        [_header release];
+        _header = [header retain];
+    }
+    [header setStringValue:_heading];
+}
+
+- (NSString*)heading {
+    return [NSString stringWithString:_heading];
+}
+
+- (void)resizeButtons {
+    NSInteger count = [_options count], i = 0;
+    if (!count) return;
+    
+    NSRect bounds = [[self contentView] bounds];
+    
+    float buttonHeight = (bounds.size.height - (4.0f * (count - 1))) / count, currentY = 0.0f;
+    
+    for (; i < count; i++) {
+        [[_options objectAtIndex:(count - i - 1)] setFrame:NSMakeRect(0.0f, currentY, bounds.size.width, buttonHeight)];
+        currentY += buttonHeight + 4.0f;
+        [[_options objectAtIndex:(count - i - 1)] setNeedsDisplay:YES];
+    }
+}
+
+- (void)addButton:(JeremyOption*)button {
+    [_options addObject:button];
+    [[self contentView] addSubview:button];
+    [self resizeButtons];
+}
+
+- (void)addButtons:(NSArray*)array {
+    [_options addObjectsFromArray:array];
+    for (NSView* view in array) [[self contentView] addSubview:view];
+    [self resizeButtons];
+}
+
+- (JeremyOption*)makeButton:(NSString*)buttonTitle withAction:(SEL)action forTarget:(id)target {
+    JeremyOption *new = [JeremyOption new];
+    [new setTarget:target]; [new setAction:action];
+    [new setTitle:buttonTitle];
+    [self addButton:new];
+    [new release];
+    return new;
+}
+
+- (void)removeButton:(int)index {
+    [[_options objectAtIndex:index] removeFromSuperview];
+    [_options removeObjectAtIndex:index];
+    [self resizeButtons];
+}
+
+- (void)removeAllButtons {
+    for (NSView* view in _options) [view removeFromSuperview];
+    [_options removeAllObjects];
+}
+- (void)disableAllButtons {
+    for (JeremyOption* view in _options) [view setEnabled:NO];
+}
+- (void)enableAllButtons {
+    for (JeremyOption* view in _options) [view setEnabled:YES];
+}
+
+- (void)dealloc {
+    [_options release];
+    [_header release];
+    [_heading release];
+    [super dealloc];
+}
+@end
 
 static inline JeremyUIController **theController(void) {
     static JeremyUIController *controller;
@@ -24,24 +136,36 @@ static inline JeremyUIController **theController(void) {
     return *theController();
 }
 
+- (void)setLeftPanel:(JeremyPanel*)leftPanel {
+    [_leftPanel setHeader:nil];
+    [_leftPanel removeFromSuperview];
+    [left addSubview:leftPanel];
+    [leftPanel setFrame:NSMakeRect(0, 0, [left frame].size.width, [left frame].size.height)];
+    [leftPanel setHeader:leftTitle];
+    _leftPanel = leftPanel;
+}
+
+- (void)setRightPanel:(JeremyPanel*)rightPanel {
+    [_rightPanel setHeader:nil];
+    [_rightPanel removeFromSuperview];
+    [right addSubview:rightPanel];
+    [rightPanel setFrame:NSMakeRect(0, 0, [right frame].size.width, [right frame].size.height)];
+    [rightPanel setHeader:rightTitle];
+    _rightPanel = rightPanel;
+}
+
 - (void)awakeFromNib {
     [SIMASRuntime runtime];
 	[userInput setDelegate:self];
 	currentUserInput = nil;
 	displays = [NSMutableArray new];
 	printQueue = [NSMutableArray new];
-    *theController() = self;
     game = [JeremyRuntime beginJeremyRuntime];
-}
-
-- (void)clearLogs {
-	[gameLogs setString:@""];
-	[logClearButton setEnabled:NO];
 }
 
 - (IBAction)clearLogs:(id)sender {
 	[gameLogs setString:@""];
-	[sender setEnabled:NO];
+	[logClearButton setEnabled:NO];
 }
 
 - (NSString*)getUserInput {
@@ -118,14 +242,6 @@ static inline JeremyUIController **theController(void) {
 	[mainDisplay setImage:image];
 }
 
-- (JeremyPanel*)getPanel:(JeremyUIPosition)position {
-	switch (position) {
-		case JeremyLeft: return leftPanel;
-		case JeremyRight: return rightPanel;
-		default: return nil;
-	}
-}
-
 + (NSTextField*)newLabel {
 	NSTextField* new = [NSTextField new];
 	[new setEditable:NO];
@@ -143,11 +259,9 @@ static inline JeremyUIController **theController(void) {
 }
 
 - (void)resizeLabels {
-	NSInteger labelCount = [displays count], i = 0;
-	float padding = 9.0f, currentX = padding, buttonSize = (([topDisplay frame]).size.width - (padding * (labelCount + 1))) / labelCount;
-	unsigned int theReferenceMask = NSViewMinXMargin | NSViewWidthSizable | NSViewMaxXMargin | NSViewMinYMargin;
-	for (; i < labelCount; i++) {
-		NSView *theTarget = [displays objectAtIndex:i];
+	float padding = 9.0f, currentX = 0.0f, buttonSize = (([topDisplay frame]).size.width - (padding * ([displays count] - 1))) / [displays count];
+	unsigned int theReferenceMask = NSViewMinXMargin | NSViewWidthSizable | NSViewMaxXMargin;
+	for (NSView *theTarget in displays) {
 		[[theTarget retain] removeFromSuperview]; // retain count goes from 2 (in superview) to 3 (retained) to 2 (removed)
 		NSRect theRect = NSMakeRect(currentX, 0.0f, buttonSize, ([topDisplay frame]).size.height);
 		[theTarget setFrame:theRect];
@@ -157,10 +271,16 @@ static inline JeremyUIController **theController(void) {
 		[theTarget release]; // retain count back to 2
 		[theTarget setNeedsDisplay:YES];
 	}
+    if ([displays count] > 1) {
+        [(NSView*)[displays objectAtIndex:0] setAutoresizingMask:(NSViewWidthSizable | NSViewMaxXMargin)];
+        [(NSView*)[displays lastObject] setAutoresizingMask:(NSViewMinXMargin | NSViewWidthSizable)];
+    } else if ([displays count]) {
+        [(NSView*)[displays lastObject] setAutoresizingMask:NSViewWidthSizable];
+    }
 }
 
 - (void)addLabel:(NSTextField*)field {
-	[[theWindow contentView] addSubview:field]; // retain count (in the scope of this class, this class owns it now) 1
+	[topDisplay addSubview:field]; // retain count (in the scope of this class, this class owns it now) 1
 	[displays addObject:field]; // retain count 2
 	[self resizeLabels];
 }
@@ -180,8 +300,7 @@ static inline JeremyUIController **theController(void) {
 }
 
 - (void)removeAllLabels {
-	NSInteger i = 0, count = [displays count];
-	for (; i < count; i++) [[displays objectAtIndex:i] removeFromSuperview]; // retain counts: 1
+    for (NSTextField* display in displays) [display removeFromSuperview];
 	[displays removeAllObjects]; // all is nuked
 }
 

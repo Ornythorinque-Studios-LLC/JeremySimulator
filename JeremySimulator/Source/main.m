@@ -23,10 +23,5 @@
 #import "JeremyRuntime.h"
 
 int main(int argc, const char * argv[]) {
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    [JeremyRuntime runtime];
-    [[JeremyRuntime runtime] registerLibrary:[SIMASStandardLibrary class] withPrefix:@""];
-    [[JeremyRuntime runtime] registerLibrary:[SIMASListLibrary class] withPrefix:@"List"];
-    [pool release];
     return NSApplicationMain(argc, argv);
 }
